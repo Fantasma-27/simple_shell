@@ -119,7 +119,7 @@ args = malloc(bufsize * sizeof(char *));
 if (args == NULL)
 {
 perror("malloc");
-return NULL;
+return (NULL);
 }
 
 token = strtok(input, " ");
@@ -132,17 +132,18 @@ count++;
 if (count >= bufsize)
 {
 bufsize *= 2;
-args = realloc(args, bufsize * sizeof(char *));
+args = (char **)realloc(args, bufsize * sizeof(char *));
 if (args == NULL)
 {
 perror("realloc");
-return NULL;
+return (NULL);
 }
 }
 
 token = strtok(NULL, " ");
 }
+
 args[count] = NULL; /* Null-terminate the array */
 
-return args;
+return (args);
 }
