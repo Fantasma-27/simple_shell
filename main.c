@@ -12,11 +12,11 @@
 */
 void handle_exit(char *line)
 {
-    if (strcmp(line, "exit") == 0)
-    {
-        free(line);
-        exit(EXIT_SUCCESS);
-    }
+if (strcmp(line, "exit") == 0)
+{
+free(line);
+exit(EXIT_SUCCESS);
+}
 }
 
 /**
@@ -26,21 +26,21 @@ void handle_exit(char *line)
 */
 char *read_input(void)
 {
-    char *line = NULL;
-    size_t len = 0;
+char *line = NULL;
+size_t len = 0;
 
-    write(STDOUT_FILENO, "($) ", 4);
-    if (getline(&line, &len, stdin) == -1)
-    {
-        free(line);
-        return (NULL);
-    }
+write(STDOUT_FILENO, "($) ", 4);
+if (getline(&line, &len, stdin) == -1)
+{
+free(line);
+return (NULL);
+}
 
-    /* Remove trailing newline character */
-    if (line[strlen(line) - 1] == '\n')
-        line[strlen(line) - 1] = '\0';
+/* Remove trailing newline character */
+if (line[strlen(line) - 1] == '\n')
+line[strlen(line) - 1] = '\0';
 
-    return (line);
+return (line);
 }
 
 /**
@@ -50,24 +50,24 @@ char *read_input(void)
 */
 int main(void)
 {
-    char *line;
-    char *args[2];
+char *line;
+char *args[2];
 
-    while (1)
-    {
-        line = read_input();
-        if (line == NULL)
-            exit(EXIT_SUCCESS);
+while (1)
+{
+line = read_input();
+if (line == NULL)
+exit(EXIT_SUCCESS);
 
-        handle_exit(line);
+handle_exit(line);
 
-        /* Prepare the argument vector for the command */
-        args[0] = line;
-        args[1] = NULL;
+/* Prepare the argument vector for the command */
+args[0] = line;
+args[1] = NULL;
 
-        /* Execute the command */
-        execute_command(args);
-    }
+/* Execute the command */
+execute_command(args);
+}
 
-    return (0);
+return (0);
 }
